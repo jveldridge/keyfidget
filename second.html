@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title>KeyFidget Test - Second</title>
+    <script>
+      window.onkeyup = function(e) {
+        var key = e.keyCode ? e.keyCode : e.which;
+        if (key == 37) {
+            window.location = "first.html"
+        }
+    }
+    </script>
+  </head>
+  <body>Second page; use left arrow to go to first page
+  </body>
+</html>
