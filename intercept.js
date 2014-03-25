@@ -9,7 +9,7 @@ window.onkeyup = function(e) {
     var key = e.keyCode ? e.keyCode : e.which;
     if (key == RIGHT_ARROW || key == LEFT_ARROW) {
         console.log("sending message");
-        chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
+        chrome.runtime.sendMessage({sender: window.location}, function(response) {
           console.log(response.farewell);
         });
     }
