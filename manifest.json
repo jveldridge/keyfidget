@@ -16,7 +16,6 @@
             "run_at": "document_start"
         }
     ],
-    //"permissions": ["http://*.google.com/", "https://*.google.com/"],
     "permissions": ["webRequest", "webRequestBlocking", "http://*/*"],
     "browser_action": {
         "default_title": "KeyFidget",
