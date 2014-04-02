@@ -6,25 +6,8 @@ var last = "";
 var scroll_x = 0;
 var scroll_y = 0;
 
-function is_probably_navigation_request(reqUrl) {
-	return hasExtension(reqUrl, ".html") || endsWith(reqUrl, ".htm");
-}
-
-function hasExtension(url, ext) {
-    var stop = url.indexOf('?');
-    if (stop == -1) {
-        stop = url.length;
-    }
-    url = url.substring(0, stop);
-    return endsWith(url, ext);
-}
-
-function endsWith(str, suffix) {
-    return str.indexOf(suffix, str.length - suffix.length) !== -1;
-}
-
-var callback = function(details) {
-	if (block && is_probably_navigation_request(details.url)) {
+var beforeRequestHandler = function(details) {
+    if (block) {
 		console.log("REQUEST SHOULD BE BLOCKED");
 		console.log("request url: " + details.url);
 		console.log("redirecting to: " + curr);
@@ -36,9 +19,9 @@ var callback = function(details) {
 	}
 }
 var opt_extraInfoSpec = ["blocking"];
-var filter = {urls: ["<all_urls>"]};
+var filter = {urls: ["<all_urls>"], types: ["main_frame"]};
 
-chrome.webRequest.onBeforeRequest.addListener(callback, filter, opt_extraInfoSpec);
+chrome.webRequest.onBeforeRequest.addListener(beforeRequestHandler, filter, opt_extraInfoSpec);
 
 var msgReceived = function(message, sender) {
 	// console.log("message: " + JSON.stringify(message) + "; sender: " + JSON.stringify(sender));
